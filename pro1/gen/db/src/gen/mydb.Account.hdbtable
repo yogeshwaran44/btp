@@ -1,0 +1,5 @@
+COLUMN TABLE mydb_Account (
+  id INTEGER NOT NULL,
+  type NVARCHAR(5000),
+  PRIMARY KEY(id)
+)

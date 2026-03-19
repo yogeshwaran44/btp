@@ -1,0 +1,9 @@
+COLUMN TABLE mydb_User (
+  street NVARCHAR(5000),
+  city NVARCHAR(5000),
+  id INTEGER NOT NULL,
+  name NVARCHAR(5000),
+  gender NVARCHAR(5000),
+  emails NCLOB,
+  PRIMARY KEY(id)
+)

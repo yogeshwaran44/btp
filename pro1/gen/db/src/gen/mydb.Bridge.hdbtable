@@ -1,0 +1,5 @@
+COLUMN TABLE mydb_Bridge (
+  user_id INTEGER NOT NULL,
+  account_id INTEGER NOT NULL,
+  PRIMARY KEY(user_id, account_id)
+)

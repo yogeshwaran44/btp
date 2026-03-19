@@ -1,0 +1,4 @@
+COLUMN TABLE mydb_Address (
+  street NVARCHAR(5000),
+  city NVARCHAR(5000)
+)

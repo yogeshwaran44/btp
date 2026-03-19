@@ -1,0 +1,4 @@
+VIEW myservice_bridge AS SELECT
+  Bridge_0.user_id,
+  Bridge_0.account_id
+FROM mydb_Bridge AS Bridge_0

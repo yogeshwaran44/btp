@@ -1,0 +1,27 @@
+{
+  "format_version": 1,
+  "imports": [
+    {
+      "target_table": "MYDB_BRIDGE",
+      "source_data": {
+        "data_type": "CSV",
+        "file_name": "mydb-Bridge.csv",
+        "has_header": true,
+        "type_config": {
+          "delimiter": ","
+        }
+      },
+      "import_settings": {
+        "import_columns": [
+          "USER_ID",
+          "ACCOUNT_ID"
+        ],
+        "include_filter": []
+      },
+      "column_mappings": {
+        "USER_ID": "user_id",
+        "ACCOUNT_ID": "account_id"
+      }
+    }
+  ]
+}

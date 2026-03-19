@@ -1,0 +1,8 @@
+VIEW myservice_user AS SELECT
+  User_0.street,
+  User_0.city,
+  User_0.id,
+  User_0.name,
+  User_0.gender,
+  User_0.emails
+FROM mydb_User AS User_0
