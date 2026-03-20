@@ -89,23 +89,6 @@ export default cds.service.impl(async function () {
 
     });
 
-    this.before("CREATE",log,async(req)=>{
-
-        const { id, user_id} = req.data;
-        if(!id){
-            req.error(400,"id is required");
-            return;
-        }
-        if(!user_id){
-            req.error(400,"user_id is required");
-            return;
-        }
-        const user_check = await SELECT.one.from(user).where({id:user_id});
-        if(!user_check){
-            req.error(404,"user not found");
-            return;
-        }
-    });
 
     
     this.before("CREATE",vehicle,async(req)=>{
