@@ -3,19 +3,19 @@ namespace management;
 entity Vehicles{
     key vehicle_id : String;
     model_name : String;
-    old_price : Integer;
-    current_price : Integer;
-    status : String;
+    old_price : Decimal(10,2);
+    current_price : Decimal(10,2);
+    status : String enum {pending;approved;rejected};
     user : association to User;
     dealer : association to Dealers;
-    order : composition of many Orders on order.vehicle=$self;
+    orders : composition of many Orders on orders.vehicle=$self;
 }
 
 entity Dealers{ 
     key dealer_id : Integer;
     dealer_name : String;
-     location : String;
-    State : String;
+    location : String;
+    state : Association to State;
 }
 
 entity Orders{
