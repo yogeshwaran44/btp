@@ -12,12 +12,7 @@ a composition is a strong relationship between two entities where the child enti
 
 Projection is a way to create a view of an existing entity by selecting specific fields or reshaping data, usually for exposing it through a service.
 
-
-CAP is a framework provided by SAP to build enterprise applications using a model-driven approach, supporting data modelling, service creation, and business logic with minimal code.
-Full-stack framework
-Supports Java & Node.js
-Auto-generates OData/REST APIs
-
+CAP is a framework provided by SAP to build enterprise applications using a model-driven approach, supporting data modelling, service creation, and business logic with minimal code. Full-stack framework  Supports Java & Node.js  Auto-generates OData/REST APIs
 
 CDS is a data modelling framework in CAP used to define entities, relationships, and services in a structured and database-agnostic way.
 
@@ -26,12 +21,7 @@ CDL is the textual language used to write CDS models, typically stored in .cds f
 Arrayed types in CDS are used to store multiple values of the same type in a single field, similar to a list or array.
 
 OData (Open Data Protocol) is a standard protocol used to build and consume RESTful APIs for querying and manipulating data.
-OData = a standard way to access data over HTTP
-Read data
-Filter data
-Sort data
-Expand relationships
-All using URL-based queries
+OData = a standard way to access data over HTTP  Read data  Filter data  Sort data  Expand relationships  All using URL-based queries
 
 An OData adapter is a component that translates application data and requests into the OData protocol format, enabling standardized data access and communication.
 
@@ -41,3 +31,20 @@ Annotations in CDS are metadata used to add additional information or behaviour 
 
 
 An enum (enumeration) in CDS is used to define a fixed set of constant values that a field can take.
+
+
+before handler : 
+this.before(event, entity?, handler)
+handler = async (req) => { }
+
+
+on handler:
+this.on(event, entity?, handler)
+handler = async (req, next) => { }
+
+
+after handler:
+this.after(event, entity?, handler)
+handler = async (data, req) => { }
+
+
