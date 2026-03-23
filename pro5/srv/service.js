@@ -64,7 +64,7 @@ export default cds.service.impl(async function (){
     //logging successful api calls
 
     this.after('*',async(data,req)=>{
-        if (req.target.name === 'log') return;
+        if (req.target.name === 'myservice.log') return;
         await INSERT.into(log).entries({id:cds.utils.uuid(), user_id : req.user.id, time: new Date()});
     });
 
@@ -151,10 +151,6 @@ export default cds.service.impl(async function (){
         await INSERT.into(state).entries(req.data);
         return "data inserted successfully";
     });
-    this.on("READ",state,async(req)=>{
-        const read = await SELECT.from(state);
-        return read;
-    });
     this.on("UPDATE",state,async(req)=>{
         const name = req.params[0].name;
         const exists = await SELECT.one.from(state).where({ name });
@@ -213,5 +209,25 @@ export default cds.service.impl(async function (){
         await DELETE.from(log).where({id});
         return "log deleted successfully";
     })
+
+    this.on('READ', state,async (req) => {
+
+        const data = await SELECT.from(state);
+    if (Array.isArray(data)) {
+        return data.map(s => ({ stateId: s.name }));
+    }
+
+    return { stateId: data.name };
+});
+
+this.on('READ', vehicle,async (req) => {
+
+        const data = await SELECT.from(vehicle);
+    if (Array.isArray(data)) {
+        return data.map(v => ({ stateId: v.vehicle_id }));
+    }
+
+    return { stateId: data.vehicle_id };
+});
 
 });

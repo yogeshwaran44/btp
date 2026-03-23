@@ -47,7 +47,7 @@ entity State{
 }
 
 entity User{
-    key id : Integer;
+    key id : String;
     name : String;
 }
 
