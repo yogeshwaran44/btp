@@ -48,3 +48,25 @@ this.after(event, entity?, handler)
 handler = async (data, req) => { }
 
 
+cds object contains:
+[
+  '_events',            '_eventsCount', '_maxListeners',       
+  'model',              'db',           'cli',
+  'root',               'services',     'extend',
+  'home',               'watched',      'version',
+  'parse',              'utils',        'options',
+  'env',                'plugins',      'requires',
+  'server',             'log',          'builtin',
+  'service',            'debug',        'app',
+  'resolve',            'load',         'compile',
+  'deploy',             'edmxs',        'minify',
+  'type',               'linked',       'entity',
+  'connect',            'Service',      'infer',
+  'ql',                 'compiler',     'EventContext',        
+  'User',               'serve',        'i18n',
+  'ApplicationService', 'middlewares',  'Request',
+  'shutdown',           'odata'
+]
+
+cds is not just one thing, it’s runtime engine, ORM, query builder, service framework.
+@sap/cds is built on top of Express.js
