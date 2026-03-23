@@ -68,7 +68,6 @@ entity Profile{
 }
 
 entity Hr : managed,cuid{
-    key id : Integer;
     name : String;
     gender : String enum {male;female;others};
     customer : Association to Customers on customer.id = customer_ID;
