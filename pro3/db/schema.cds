@@ -85,3 +85,17 @@ type Account_types{
     name : String;
     allowed : many String;
 }
+
+
+entity Student{
+    key id : String;
+    con : Composition of many Connections on con.stu = $self;
+}
+entity Connections{
+    stu : Association to Student;
+    ass : Association to Assignments; 
+}
+entity Assignments {
+    key  id: Integer;
+    name : String;
+}
