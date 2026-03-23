@@ -86,6 +86,7 @@ type Account_types{
     allowed : many String;
 }
 
+//composition of many to many
 
 entity Student{
     key id : String;
