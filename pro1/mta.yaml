@@ -25,6 +25,7 @@ modules:
           srv-url: ${default-url}
     requires:
       - name: pro1-db
+      - name: pro1-auth
 
   - name: pro1-db-deployer
     type: hdb
@@ -40,3 +41,21 @@ resources:
     parameters:
       service: hana
       service-plan: hdi-shared
+  - name: pro1-auth
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: xsuaa
+      service-plan: application
+      path: ./xs-security.json
+      config:
+        xsappname: pro1-${org}-${space}
+        tenant-mode: dedicated
+        oauth2-configuration:
+          credential-types:
+            - "binding-secret"
+            - "x509"
+        role-collections:
+          - name: 'admin (pro1 ${org}-${space})'
+            description: 'generated'
+            role-template-references:
+              - '$XSAPPNAME.admin'
