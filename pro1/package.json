@@ -13,5 +13,27 @@
   "scripts": {
     "start": "cds-serve"
   },
+  "cds":{
+    "requires":{
+      "auth":{
+              "kind":"mocked",
+              "users":{
+                "alice":{
+                  "roles":[
+                    "admin"
+                  ],
+                  "password":"123"                  
+              },
+               
+                "bob":{
+                  "roles":[
+                    "customer"
+                  ],
+                  "password":"123"                  
+              }
+            }
+          }
+    }
+  },
   "private": true
 }
