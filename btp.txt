@@ -70,3 +70,14 @@ cds object contains:
 
 cds is not just one thing, it’s runtime engine, ORM, query builder, service framework.
 @sap/cds is built on top of Express.js
+
+
+types of auth:
+basic
+digest
+api keys
+session-based
+jwt
+oauth2
+openid
+single sign on
