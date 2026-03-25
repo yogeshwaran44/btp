@@ -81,3 +81,7 @@ jwt
 oauth2
 openid
 single sign on
+
+
+CDS artifacts were converted to hdbtable and hdbview artifacts. You will find those artifacts in a new folder under /gen/db/src called gen.
+deploy those objects into the HANA Database creating tables and views
