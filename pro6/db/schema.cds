@@ -1,47 +1,60 @@
-using {cuid,managed} from '@sap/cds/common';
-
 namespace mydb;
 
-entity One{
+entity User{
     key id : Integer;
     name : String;
-    three : Association to many Three on three.one = $self;
+    laptop_ID : Integer;
+    laptop : Association to Laptop on laptop.id = $self.laptop_ID;
 }
 
-entity Two {
+entity Laptop{
     key id : Integer;
     name : String;
-    three : Association to many Three on three.two = $self;
 }
 
-entity Three{
-    key one : Association to One;
-    key two : Association to Two;
-}
-
-entity four : cuid, managed{
-    name : String;
-    gender : String enum {male;female;others};
-    address : Address;
-    skills : many String;
-}
-
-type Address {
-    street: String;
-    city : String;
-}
-
-entity Five {
+entity User1 {
     key id : Integer;
     name : String;
-    seven : composition of many Seven on seven.five = $self;
 }
-entity Six{
+
+entity Laptop1 {
     key id : Integer;
     name : String;
-    seven
+    user : Association to User1;
 }
-entity Seven{
-    five : Association to Five;
-    six : Association to Six;
+
+entity User2{
+    key id : Integer;
+    name : String;
+    con : Association to many Con on con.user = $self;
+}
+
+entity Laptop2{
+    key id :Integer;
+    name : String;
+    con : Association to many Con on con.lap = $self;
+}
+
+entity Con {
+    key user : Association to User2;
+    key lap : Association to Laptop2;
+}
+
+entity User3{
+    key id : Integer;
+    name : String;
+    con : Association to many Con1 on con.user_id = $self.id;
+}
+
+entity Laptop3{
+    key id : Integer;
+    name : String;
+    con : Association to many Con1 on con.lap_id = $self.id;
+}
+
+entity Con1{
+    key user_id : Integer;
+    key lap_id : Integer;
+    user : Association to User3 on user.id = $self.user_id;
+    lap : Association to Laptop3 on lap.id = $self.lap_id;
 }
