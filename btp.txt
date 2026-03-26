@@ -85,3 +85,55 @@ single sign on
 
 CDS artifacts were converted to hdbtable and hdbview artifacts. You will find those artifacts in a new folder under /gen/db/src called gen.
 deploy those objects into the HANA Database creating tables and views
+
+General Purpose
+@title			Human-readable label	@Common.Label
+@description		Detailed description	@Core.Description
+
+Access Control
+@restrict		Defines fine-grained access rules
+@requires		Restricts access to specific roles
+
+Input Validation
+@readonly		Field cannot be modified
+@mandatory		Field must have a value
+@assert.target		Ensures valid reference (association exists)
+@assert.format		Validates value using regex
+@assert.range		Restricts value within a range
+
+Services / APIs
+@path			Defines custom API endpoint path
+@impl			Links to service implementation
+@odata.etag		Enables optimistic locking
+@cds.autoexpose		Automatically exposes entity in service
+@cds.api.ignore		Hides entity from API
+@cds.query.limit	Limits query result size
+@cds.localized		Enables multilingual support
+@cds.valid.from/to	Handles temporal (time-based) data
+@cds.search		Enables search functionality
+
+Persistence
+@cds.persistence.exists	Table already exists (skip creation)
+@cds.persistence.table	Force creation as table
+@cds.persistence.skip	Skip DB persistence
+@cds.persistence.mock	Exclude from mock data
+@cds.on.insert		Auto-fill value on insert
+@cds.on.update		Auto-fill value on update
+@sql.prepend		Add SQL before generated SQL
+@sql.append		Add SQL after generated SQL
+
+OData (Shortcuts)
+@ValueList.entity	Provides value help (dropdown list)
+@odata.Type		Override OData data type
+@odata.MaxLength	Set max string length
+@odata.Precision	Define numeric precision
+@odata.Scale		Define decimal scale
+@odata.singleton	Marks entity as single instance
+
+OData (Core Annotations)
+@Core.Computed		Value is auto-calculated
+@Core.Immutable		Value cannot be changed after creation
+@Core.MediaType		Defines MIME type
+@Core.IsMediaType	Marks field as media type
+@Core.IsUrl		Field contains a URL
+@Capabilities.*		Defines API capabilities (filter, sort)
