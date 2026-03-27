@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Privilege:analyticPrivilege xmlns:Privilege="http://www.sap.com/ndb/BiModelPrivilege.ecore" id="V_INTERACTION" privilegeType="SQL_ANALYTIC_PRIVILEGE" schemaVersion="1.1">
+    <descriptions defaultDescription="V_INTERACTION"/>
+    <securedModels/>
+</Privilege:analyticPrivilege>

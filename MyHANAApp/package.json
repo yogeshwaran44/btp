@@ -19,9 +19,11 @@
   "private": true,
   "cds": {
     "requires": {
-      "[production]": {
+       "db": {
+      "kind": "hana"
+    },
         "auth": "xsuaa"
-      }
+      
     }
   }
 }
