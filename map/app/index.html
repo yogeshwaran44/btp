@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-color: rgb(27, 101, 137);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 90vh;
+        }
+        .header{
+            text-align: center;
+            color: rgb(144, 240, 42);
+            display: flex;
+            align-items: center;
+            height : 30vh;
+        }
+        .content{
+            height:60vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .result{
+            height: 80%;
+        }
+        .result p{
+            font-weight: 500;
+            font-size: 1.3rem;
+        }
+        .result span{
+            color: rgb(73, 218, 231);
+        }
+        .search{
+            height: 20%;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        button{
+            color: rgb(30, 4, 4);
+            background-color: rgb(215, 250, 249);
+            border: rgb(9, 74, 213);
+            padding: 10px;
+            border-radius: 10px;
+            font-size: large;
+        }
+        button:hover{
+            cursor: pointer;
+            color: rgb(0, 4, 255);
+            background-color: rgb(152, 162, 233);
+        }
+        #address{
+            height: 39px;
+            font-size: large;
+
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+    <h1 class="headline">Location Finder</h1>
+    </div>
+    <div class="content">
+        <div class="search">
+    <input type="text" id="address" placeholder="enter city or pincode" />
+    <button onclick="getLocation()">search</button>
+    </div>
+    <div class="result" id="result"></div>
+    </div>
+    <script>
+        async function getLocation(){
+            const input = document.getElementById("address");
+            const address = input.value;
+            if(!address){
+                alert("enter the address");
+                return;
+            }
+            try{
+                const respose = await fetch(`/odata/v4/myservice/getCoordinates(address='${address}')`);
+                const data = await respose.json();
+                document.getElementById("result").innerHTML=
+                `<p>name  : <span>${data.name}</span></p>
+                <p>latitude : <span>${data.latitude}</span></p>
+                <p>longitude : <span>${data.longitude}</span></p>`;
+                input.value ="";
+                input.focus();
+            }catch(e){
+                console.error(e.message);
+                alert("Error loading data");
+            }           
+        }
+    </script>
+</body>
+</html>
