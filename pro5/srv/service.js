@@ -224,10 +224,10 @@ this.on('READ', vehicle,async (req) => {
 
         const data = await SELECT.from(vehicle);
     if (Array.isArray(data)) {
-        return data.map(v => ({ stateId: v.vehicle_id }));
+        return data.map(v => ({ vehicleId: v.vehicle_id }));
     }
 
-    return { stateId: data.vehicle_id };
+    return { vehicleId: data.vehicle_id };
 });
 
 });
