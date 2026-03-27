@@ -2,7 +2,8 @@
   "name": "map",
   "version": "1.0.0",
   "dependencies": {
-    "@sap/cds": "^9"
+    "@sap/cds": "^9",
+    "axios": "^1.13.6"
   },
   "devDependencies": {
     "@cap-js/sqlite": "^2"
