@@ -1,3 +1,5 @@
+reffered from: https://cap.cloud.sap/docs/
+
 an entity is a structured data model that represents a business object, similar to a table in a database. It defines fields, their data types, and relationships with other entities using CDS (Core Data Services). These entities are used to generate database tables and expose data through services like OData.
 
 a type is a reusable data definition used to define the structure or data type of fields inside entities. It helps avoid repetition and improves consistency across the data model.
@@ -137,3 +139,291 @@ OData (Core Annotations)
 @Core.IsMediaType	          Marks field as media type
 @Core.IsUrl		          Field contains a URL
 @Capabilities.*		          Defines API capabilities (filter, sort)
+
+
+
+Informational responses (100 – 199)
+Successful responses (200 – 299)
+Redirection messages (300 – 399)
+Client error responses (400 – 499)
+Server error responses (500 – 599)
+
+Informational responses
+100 Continue
+101 Switching Protocols
+102 Processing Deprecated
+103 Early Hints
+
+Successful responses
+200 OK
+201 Created
+202 Accepted
+203 Non-Authoritative Information
+204 No Content
+205 Reset Content
+206 Partial Content
+207 Multi-Status (WebDAV)
+208 Already Reported (WebDAV)
+226 IM Used (HTTP Delta encoding)
+
+Redirection messages
+300 Multiple Choices
+301 Moved Permanently
+302 Found
+303 See Other
+304 Not Modified
+305 Use Proxy Deprecated
+306 unused
+307 Temporary Redirect
+308 Permanent Redirect
+
+Client error responses
+400 Bad Request
+401 Unauthorized
+402 Payment Required
+403 Forbidden
+404 Not Found
+405 Method Not Allowed
+406 Not Acceptable
+407 Proxy Authentication Required
+408 Request Timeout
+409 Conflict
+410 Gone
+411 Length Required
+412 Precondition Failed
+413 Content Too Large
+414 URI Too Long
+415 Unsupported Media Type
+416 Range Not Satisfiable
+417 Expectation Failed
+418 I'm a teapot
+421 Misdirected Request
+422 Unprocessable Content (WebDAV)
+423 Locked (WebDAV)
+424 Failed Dependency (WebDAV)
+425 Too Early Experimental
+426 Upgrade Required
+428 Precondition Required
+429 Too Many Requests
+431 Request Header Fields Too Large
+451 Unavailable For Legal Reasons
+
+Server error responses
+500 Internal Server Error
+501 Not Implemented
+502 Bad Gateway
+503 Service Unavailable
+504 Gateway Timeout
+505 HTTP Version Not Supported
+506 Variant Also Negotiates
+507 Insufficient Storage (WebDAV)
+508 Loop Detected (WebDAV)
+510 Not Extended
+511 Network Authentication Required
+
+
+
+
+To implement domain-specific custom logic:
+
+    Define services in CDS
+    Add service implementations → cds.Service > Implementations
+    Register custom event handlers in which → srv.on/before/after
+    Read/write data from other services in which → srv.run + cds.ql
+    ..., that is from your primary database → cds.DatabaseService
+    ..., that is from other connected services → cds.RemoteService
+    Emit and handle asynchronous events → cds.MessagingService
+
+
+Node.js:
+The cds Facade
+cds. compile()
+cds. linked()
+cds. server
+cds. serve()
+cds. connect()
+cds. Services
+cds. Events
+cds. Queries
+cds. log()
+cds. i18n
+cds. env
+cds. utils
+Serving Fiori UIs
+Transactions
+Security
+Plugins
+Testing
+
+Services:
+In CAP, everything is a service.Expose data (Provided services),Consume external systems (Required services),Handle requests via event-driven architecture
+Provided Services :
+A CAP application mainly consists of the services it provides to clients. Such provided services are commonly declared through service definitions in CDS, and served automatically during bootstrapping
+Required Services :
+Required services are external services that an application depends on to function. A common example is the primary database like cds.db. Applications may also use services from other enterprise apps, microservices, or platform services such as secondary databases and message brokers.
+
+
+CAP services work using event handlers:
+before → validation
+on → core logic (CRUD, actions)
+after → modify response
+
+Sending Requests:
+srv.send() → REST-style
+srv.run() → Query-based 
+
+Events (Async)
+srv.emit('EventName', data)
+srv.on('EventName', msg => {})
+Used for messaging & microservices
+
+Transactions
+srv.run(tx => { ... })
+Consistency across DB actions
+
+
+
+
+cds.Request → synchronous (CRUD/API)
+cds.Event → asynchronous (messaging)
+
+
+cds.Request (Synchronous Requests):
+Extends cds.Event
+Used for CRUD & actions
+Key properties:
+method → HTTP method
+target → entity
+params → URL params
+query → CQN query
+subject → single row reference
+
+Return result:
+return data  or req.reply(data)
+
+
+Reject request (errors):
+req.reject(400, 'MISSING_INPUT', 'title') - Sends proper HTTP error response
+Collect multiple errors:
+req.error(400, 'Invalid') -Stored in req.errors.Auto-rejected later
+
+Messages (non-error):
+req.info('Info')
+req.warn('Warning')
+req.notify('Message')
+Sent via response headers
+
+Request Data Access:
+req.data → input data
+req.query → query object
+req.params → path parameters
+
+Modify input safely:
+req.data.field = 'value
+
+Error Handling:
+Errors converted to standard HTTP/OData responses
+Supports:status,code,message,target
+Example response:
+{
+  "error": {
+    "code": "MISSING_INPUT",
+    "message": "Input is required",
+    "target": "title"
+  }
+}
+
+
+
+
+
+
+cds.ql:
+cds.ql is used to build queries in CQN (Core Query Notation)
+Works like SQL but Database-agnostic
+Can run on DB, OData, REST, etc.
+
+Executing Queries:
+Using service:  await srv.run(query)
+Shortcut:  await SELECT.from(Books)
+Default execution: Goes to cds.db
+
+Queries are First-Class Objects
+Queries are not executed immediately
+Can be:Stored,Modified,Passed around
+let q = SELECT.from(Books)
+await srv.run(q)
+
+Safe Queries (SQL Injection Protection):
+CAP automatically: Uses binding parameters,Prevents SQL injection
+Safe: SELECT.from`Books`.where`ID=${input}`
+
+this.entities: → inside services
+Belongs to a service instance
+
+cds.entities: → global access
+Global access to all entities in the model
+
+
+
+
+
+CAP automatically manages transactions, so developers usually don’t need to handle them manually.
+ACID transactions
+User/tenant context
+Connection pooling
+
+Automatic Transactions (Default)
+Every service call runs in a transaction
+BEGIN → QUERY → COMMIT
+
+Nested Transactions:
+When one service calls another:
+  await db.update(...)
+  await log.insert(...)
+Root transaction
+Nested transactions for each service
+Not fully distributed (no global atomic guarantee)
+
+
+
+Manual Transactions (cds.tx()) - Used when you want full control
+
+Auto-managed style (recommended):
+await cds.tx(async () => {
+  await INSERT.into(Authors)
+  await INSERT.into(Books)
+})
+Automatically: Commit if success, Rollback if error
+
+Manual control (advanced):
+const tx = cds.tx()
+try {
+  await tx.run(...)
+  await tx.commit()
+} catch (e) {
+  await tx.rollback(e)
+}
+You must handle commit/rollback manually
+
+
+srv.tx() (Service-based Transaction) Same as cds.tx() but tied to a service
+await srv.tx(async tx => {
+  await tx.run(...)
+})
+
+Transaction Object (tx) Returned by cds.tx() or srv.tx()
+Supports:
+tx.run() → execute queries
+tx.commit() → commit
+tx.rollback() → rollback
+also Contains its own tx.context
+
+Background Jobs (cds.spawn()):
+Run tasks outside current transaction
+cds.spawn(async () => {
+  await SELECT.from('Outbox')
+})
+Runs in new transaction can run once (after) repeatedly (every)
+
+
