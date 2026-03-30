@@ -364,7 +364,49 @@ Belongs to a service instance
 cds.entities: → global access
 Global access to all entities in the model
 
+SELECT
+    .one
+    .elements
+    .distinct
+    columns()
+    from()
+    alias()
+    where()
+    having()
+    groupBy()
+    orderBy()
+    limit()
+    forUpdate()
+    forShareLock()
+    hints()
+    pipeline()
+    stream()
+    foreach()
 
+INSERT
+
+    into()
+    entries()
+    values()
+    rows()
+    from()
+
+UPSERT
+
+    into()
+    entries()
+
+UPDATE
+
+    entity()
+    set()
+    with()
+    where()
+
+DELETE
+
+    from()
+    where()
 
 
 
