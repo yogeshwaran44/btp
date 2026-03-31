@@ -3,13 +3,21 @@
   "version": "1.0.0",
   "dependencies": {
     "@sap/cds": "^9",
-    "axios": "^1.13.6"
-  },
-  "devDependencies": {
-    "@cap-js/sqlite": "^2"
+    "axios": "^1.13.6",
+    "@sap/xssec": "^4"
   },
   "scripts": {
     "start": "cds-serve"
   },
-  "private": true
+  "private": true,
+  "cds": {
+    "requires": {
+      "auth": {
+        "kind": "mocked"
+      }
+    }
+  },
+  "devDependencies": {
+    "@sap/cds-dk": "^9"
+  }
 }
