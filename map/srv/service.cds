@@ -1,5 +1,5 @@
 service myservice{
-     function getCoordinates(address : String) returns Location;   
+     function getCoordinates(address : String) returns Array of Location;   
 }
 type Location {
     name : String;

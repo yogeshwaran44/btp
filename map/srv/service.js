@@ -12,24 +12,21 @@ module.exports = cds.service.impl(function () {
                 {
                     params: {
                         q: address,
-                        format: 'json',
-                        addressdetails: 1,
-                        limit: 1
+                        format: 'json'
                     },
                     headers: {
                         'User-Agent': 'cap-app'
-                    },
-                    timeout: 5000
+                    }
                 }
             );
-
-            const data = response.data[0];
-            if (!data) return { message: "Location not found" };
-            return {
-                name:data.name,
-                latitude: data.lat,
-                longitude: data.lon
-            };
+console.log(response.data)
+            const data = response.data.map(el => ({
+                name: el.name,
+                latitude: el.lat,
+                longitude: el.lon
+            }));
+            if (!data.length) return { message: "Location not found" };
+            return data;
 
         } catch (err) {
             console.error(err.message);
