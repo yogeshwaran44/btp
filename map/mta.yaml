@@ -16,6 +16,7 @@ modules:
     path: gen/srv
     parameters:
       instances: 1
+      memory: 512M
       buildpack: nodejs_buildpack
     build-parameters:
       builder: npm-ci
@@ -24,19 +25,19 @@ modules:
         properties:
           srv-url: ${default-url}
     requires:
-      - name: map-auth
+      - name: map-db
+
+  - name: map-db-deployer
+    type: hdb
+    path: gen/db
+    parameters:
+      buildpack: nodejs_buildpack
+    requires:
+      - name: map-db
 
 resources:
-  - name: map-auth
-    type: org.cloudfoundry.managed-service
+  - name: map-db
+    type: com.sap.xs.hdi-container
     parameters:
-      service: xsuaa
-      service-plan: application
-      path: ./xs-security.json
-      config:
-        xsappname: map-${org}-${space}
-        tenant-mode: dedicated
-        oauth2-configuration:
-          credential-types:
-            - "binding-secret"
-            - "x509"
+      service: hana
+      service-plan: hdi-shared
