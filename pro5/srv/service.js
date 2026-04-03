@@ -4,6 +4,17 @@ export default cds.service.impl(async function (){
 
         const {order, vehicle, dealer, state, user, log} = this.entities;
 
+        const api = await cds.connect.to('cordinates');
+
+
+        this.before("READ",user,async(req)=>{
+            const data = await api.send({
+            method:"GET",
+             path:"/odata/v4/myservice/getLocation(city='chennai')"
+            });
+            console.log(data);
+        });
+
 
 
     //vehicle creation
