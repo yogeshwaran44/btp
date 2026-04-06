@@ -15,6 +15,11 @@
     "requires": {
       "auth": {
         "kind": "mocked"
+      },
+      "[production]": {
+        "auth": {
+          "kind": "xsuaa"
+        }
       }
     }
   },
