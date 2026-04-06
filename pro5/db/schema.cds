@@ -30,6 +30,7 @@ entity Dealers{
     location : String;
     state_name : String;
     state : Association to State on state.name = state_name;
+    city : String;
     parent_dealer : Association to Dealers;
 }
 

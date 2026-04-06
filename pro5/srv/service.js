@@ -15,6 +15,27 @@ export default cds.service.impl(async function (){
             console.log(data);
         });
 
+        this.on("READ",dealer,async(req)=>{
+              const data = await cds.run(req.query);
+              const api = await cds.connect.to('cordinates');
+              for (let e of data) {
+              if (e.city) {
+              try {
+                const response = await api.send({
+                     method:"GET",
+                    path:`/odata/v4/myservice/getLocation(city='${encodeURIComponent(e.city)}')`
+                });
+                const location = response.value?.[0];
+                if (location) {
+                    e.latitude = location.latitude;
+                    e.longitude = location.longitude;
+                }
+              } catch (error) {
+                console.error(`Error fetching location for ${e.city}`, error.message);
+              }
+              }
+            }
+        });
 
 
     //vehicle creation
