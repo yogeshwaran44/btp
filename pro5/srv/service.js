@@ -28,7 +28,7 @@ export default cds.service.impl(async function (){
         if(!['pending','approved','rejected'].includes(status)) return req.error(400,"status invalid");
         if(!dealer_dealer_id) return req.error(400,"dealer is required");
         req.data.user_id = req.user.id;
-        const id=req.data.dealer_dealer_id
+        const id=req.data.dealer_dealer_id;
         const dealers = await SELECT.one.from(dealer).where({dealer_id:id});
         if(!dealers) return req.error(400,"Dealer not found");
         const state_name = dealers.state_name;
