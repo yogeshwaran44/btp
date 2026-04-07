@@ -1,6 +1,8 @@
 using {diary} from '../db/schema';
 
 service myservice{
+    
+    @odata.draft.enabled
     entity to_do_list as projection on diary.List;
 }
 
