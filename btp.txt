@@ -469,3 +469,61 @@ cds.spawn(async () => {
 Runs in new transaction can run once (after) repeatedly (every)
 
 
+
+OData Query Options
+$select	
+$count	
+$expand	
+$format	
+Read $links	
+$value	
+$orderby
+$top	
+$skip	
+$filter	
+$inlinecount	
+$skiptoken
+
+Logical Operators
+And
+Or
+Not
+
+Comparison Operators
+Eq
+Ne
+Gt
+Ge
+Lt
+Le
+Has
+In
+
+OData syntax:
+/BaseURL/EntitySet?$queryOption=value
+
+example:
+/PurchaseOrder?$filter=PurchaseOrder eq '100045' and PurchaseOrderItem gt 65
+/Employees?$filter= PurchaseOrder eq '100045' and (PurchaseOrderItem gt 65 or PurchaseOrderItem lt 10)
+
+
+
+
+
+
+Draft Work:
+
+@odata.draft.enabled
+
+1. Create a Draft
+POST /odata/v4/AdminService/Books
+
+2. Edit the Draft
+PATCH /odata/v4/AdminService/Books(ID=a11fb6f1-36ab-46ec-b00c-d379031e817a,IsActiveEntity=false)
+
+3. Activate the Draft
+POST /odata/v4/AdminService/Books(ID=a11fb6f1-36ab-46ec-b00c-d379031e817a,IsActiveEntity=false)/draftActivate
+
+
+
+
