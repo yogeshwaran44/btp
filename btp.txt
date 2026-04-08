@@ -525,5 +525,3 @@ PATCH /odata/v4/AdminService/Books(ID=a11fb6f1-36ab-46ec-b00c-d379031e817a,IsAct
 POST /odata/v4/AdminService/Books(ID=a11fb6f1-36ab-46ec-b00c-d379031e817a,IsActiveEntity=false)/draftActivate
 
 
-
-
