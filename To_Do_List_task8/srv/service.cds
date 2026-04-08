@@ -4,6 +4,8 @@ service myservice{
     
     @odata.draft.enabled
     entity to_do_list as projection on diary.List;
+
+    entity mesg as projection on diary.Mesg;
 }
 
 annotate myservice.to_do_list with {

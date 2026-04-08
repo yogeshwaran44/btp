@@ -6,3 +6,8 @@ entity List{
     description : localized String;
     status : localized String;
 }
+
+entity Mesg{
+    key id : Integer;
+    message : String;
+}
