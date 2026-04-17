@@ -142,6 +142,22 @@ OData (Core Annotations)
 
 
 
+@Semantics.currencyCode
+@Semantics.unitOfMeasure
+@Aggregation.CustomAggregate
+@Semantics.amount.currencyCode
+@Semantics.quantity.unitOfMeasure
+@Aggregation.default
+@Aggregation.CustomAggregate
+@open
+@odata.singleton.nullable
+
+
+
+
+
+
+
 Informational responses (100 – 199)
 Successful responses (200 – 299)
 Redirection messages (300 – 399)
@@ -504,7 +520,7 @@ OData syntax:
 
 example:
 /PurchaseOrder?$filter=PurchaseOrder eq '100045' and PurchaseOrderItem gt 65
-/Employees?$filter= PurchaseOrder eq '100045' and (PurchaseOrderItem gt 65 or PurchaseOrderItem lt 10)
+/Employees?$filter=PurchaseOrder eq '100045' and (PurchaseOrderItem gt 65 or PurchaseOrderItem lt 10)
 
 
 
@@ -523,5 +539,47 @@ PATCH /odata/v4/AdminService/Books(ID=a11fb6f1-36ab-46ec-b00c-d379031e817a,IsAct
 
 3. Activate the Draft
 POST /odata/v4/AdminService/Books(ID=a11fb6f1-36ab-46ec-b00c-d379031e817a,IsActiveEntity=false)/draftActivate
+
+
+
+Kinds of Actions
+
+Actions modify data in the server
+Functions retrieve data
+Unbound actions/functions are like plain unbound functions in JavaScript.
+Bound actions/functions always receive the bound entity's primary key as implicit first argument, similar to this pointers in Java or JavaScript. The exception are bound actions to collections, which are bound against the collection and not a specific instance of the entity. An example use case are custom create actions for the SAP Fiori elements UI.
+
+
+
+
+Application Router
+The application router is the single point-of-entry for an application running in the Cloud Foundry environment on SAP BTP. The application router is used to serve static content, authenticate users, rewrite URLs, and forward or proxy requests to other micro services while propagating user information.
+
+
+
+
+
+Temporal Data
+SAP CAP provides built-in support for temporal data, which means storing and querying records based on time.
+using annotations and aspects.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@insertonly 
+@common.text
+@assert.integrity
+
+
 
 
