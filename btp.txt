@@ -579,7 +579,49 @@ using annotations and aspects.
 @insertonly 
 @common.text
 @assert.integrity
+@assert.unique
+@cds.persistence.name
+@cds.persistence.journal
+@cds.redirection.target
+@cds.persistence.udf
+@cds.dp.ordId
+@assert.notNull
+@HideFromDataInspector
+@cds.rateLimiting
+@cds.validate
+@cds.replicate
+@cds.persistence.calcview
+@cds.doc
+@cds.ambiguous 
+@cds.sql.dialect
 
 
 
+**Required annotations on external service:**
+
+- `@cds.external`
+- `@data.product`
+- `@cds.dp.ordId` - ORD ID of the external Data Product
+
+**Add external package to your project's `package.json` dependencies:**
+
+
+
+
+
+psuedo elements:
+$user: {
+      elements: {
+        id: String,
+        locale: String, // deprecated
+        tenant: String, // deprecated
+      },
+    },
+    $now: Timestamp,
+    $at: Timestamp,
+    $from: Timestamp,
+    $to: Timestamp,
+    $locale: String,
+    $tenant: String,
+}
 
