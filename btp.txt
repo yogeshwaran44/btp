@@ -486,6 +486,10 @@ Runs in new transaction can run once (after) repeatedly (every)
 
 
 
+OData is an OASIS standard that enhances plain REST with standardized system query options like $select, $expand, $filter, and others
+
+Metadata is descriptive information that explains the structure, meaning, or properties of data.
+
 OData Query Options
 $select	
 $count	
@@ -869,3 +873,46 @@ now if you access the data from port 5000 you can able to access it
 https://249d4901trial.authentication.us10.hana.ondemand.com/login 
 
  
+
+
+
+ ------------------------------------- cds cli ----------------------------------------------------
+ > cds --help
+
+USAGE
+    cds <command> [<args>]
+    cds <src>  =  cds compile <src>
+    cds        =  cds help
+
+COMMANDS
+    i | init        jump-start cds-based projects
+    a | add         add a feature to an existing project
+    m | import      add models from external sources
+    c | compile     compile cds models to different outputs
+    p | parse       parses given cds models
+    s | serve       run your services in local server
+    w | watch       run and restart on file changes
+      | mock        call cds serve with mocked service
+    r | repl        read-eval-event loop
+    e | env         inspect effective configuration
+    b | build       prepare for deployment
+    d | deploy      deploy to databases
+      | up          build and deploy your application to the cloud
+    y | bind        bind application to remote services
+      | debug       debug your application
+      | subscribe   subscribe a tenant to a multitenant SaaS app
+      | unsubscribe unsubscribe a tenant from a multitenant SaaS app
+    l | login       login to extensible multitenant SaaS app
+      | logout      logout from extensible multitenant SaaS app
+      | pull        pull base model of extensible SaaS app
+      | push        push extension to extensible SaaS app
+      | lint        run linter for env or model checks
+    v | version     get detailed version information
+      | completion  add/remove cli completion for cds commands
+    h | help        get detailed usage information
+
+  Learn more about each command using:
+  cds help <command> or
+  cds <command> --help
+
+  
