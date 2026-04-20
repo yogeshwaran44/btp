@@ -680,3 +680,192 @@ Global options:
   -v                                 Print API request diagnostics to stdout
 
 TIP: Use 'cf help -a' to see all commands.
+
+
+
+------------------------------------------ destination -------------------------------------------------------
+
+Choose Create   From Scratch   Create.
+Enter a destination name.
+From the <Type> dropdown menu, choose HTTP.
+The <Description> field is optional.
+From the <Proxy Type> dropdown box, select Internet, OnPremise, or PrivateLink, depending on the connection type you want to provide for your application.
+
+Specify the destination URL.
+From the <Authentication> dropdown box, select the authentication type you want to use for the connection.
+(Optional) For Internet and PrivateLink connections only: You can enter a trust store location and password, or use the default client trust store.
+(Optional) For OnPremise connections only: If you are using more than one Cloud Connector for your subaccount, you must enter the <Location ID> of the target Cloud Connector.
+(Optional) You can enter additional properties.
+In the Additional Properties panel, choose Add Property.
+Enter a key (name) or choose one from the dropdown menu and specify a value for the property. You can add as many properties as you need.
+To delete a property, choose the Delete icon next to it.
+Note
+For a detailed description of specific properties for SAP Business Application Studio (formerly known as SAP Web IDE), see Connecting to External Systems.
+
+When you are done, choose Create.
+
+
+in project :
+configure package.json and add destination details in it.
+
+"cds": {
+   "requires": {
+      "cordinates": {
+        "kind": "odata-v4",
+        "credentials": {
+          "destination": "map_api"
+        }
+      }    
+   }
+}
+
+
+cf create-service destination lite  service_name 
+cf create-service-key service_name key_name
+cds bind -2 service_name:key_name
+
+then cdsrc file will be automatically modified with destination details
+
+
+
+
+--------------------------------------------- xsuaa --------------------------------------------------------
+cds add xsuaa 
+
+cds add approuter 
+
+ 
+npm install 
+
+ 
+add this in xs security json 
+
+"xsappname":"zentra_xsuaa", 
+
+"tenant-mode": "dedicated", 
+
+ "oauth2-configuration": { 
+
+"redirect-uris": [ 
+
+  "http://localhost:5000/**", 
+
+  "https://*.cfapps.us10.hana.ondemand.com/**", 
+
+  "https://*.applicationstudio.cloud.sap/**" 
+
+] 
+
+  } 
+
+   
+
+add this in xs app json in app/router 
+
+{ 
+
+  "authenticationMethod":"route", 
+
+  "routes": [ 
+
+{ 
+
+  "source": "^/app/(.*)$", 
+
+  "target": "$1", 
+
+  "localDir": ".", 
+
+  "authenticationType": "xsuaa", 
+
+  "cacheControl": "no-cache, no-store, must-revalidate" 
+
+}, 
+
+{ 
+
+  "source": "^/(.*)$",	 
+
+  "target": "$1", 
+
+  "destination": "srv-api",	 
+
+  "authenticationType": "xsuaa", 
+
+  "csrfProtection": true 
+
+} 
+
+  ] 
+
+} 
+
+ 
+
+ 
+
+create service xsuaa for application 
+
+cf create-service xsuaa application zentra-auth -c xs-security.json 
+
+
+
+create a service key with xsuaa service you have created above 
+
+cf create-service-key zentra-auth zentra_key 
+
+ 
+
+bind the service and the key 
+
+cds bind -2 zentra-auth:zentra_key 
+
+ 
+
+now run this command to get the credentials and set in default env file 
+
+'cds bind --exec env' copy the vcap for xsuaa 
+
+ 
+
+run this command to install libraries inside router nodemodules 
+
+npm install @sap/approuter --prefix app/router 
+
+ 
+
+then deploy the application using in cf  
+
+ 
+
+then open two terminals 
+
+in first terminal run this cmd 
+
+'cds bind --exec -- npm start --prefix app/router' this should run in 5000 you should now see 'bad gateway' 
+
+in second terminal  
+
+'cds watch --profile hybrid' 
+
+now if u refresh the 5000 port you will redirect to ui page 
+
+ 
+
+if it worked 
+
+you have to assign the role to access the data 
+
+go to role collection in subaccount  
+
+create a role collection and add the role you have created in the service layer 
+
+and add user to role collection  
+
+now if you access the data from port 5000 you can able to access it 
+
+-------------------------------------------------------------------- 
+
+https://249d4901trial.authentication.us10.hana.ondemand.com/login 
+
+ 
