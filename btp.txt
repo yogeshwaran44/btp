@@ -915,4 +915,11 @@ COMMANDS
   cds help <command> or
   cds <command> --help
 
+
+use --help for cli ("no one remembers all the cmds" - learned from docker tutorial)
+eg:
+  cds --help
+  cds watch --help
+  cf csk --help
+
   
