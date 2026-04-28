@@ -922,4 +922,59 @@ eg:
   cds watch --help
   cf csk --help
 
-  
+
+
+
+Deployment:
+	1. Prepare for Production  (once)
+	2. Freeze Dependencies  (once: on upgrades)
+	3. Build & Assemble
+	4. Deploy to Cloud
+
+
+MTA - multitarget application
+	An application comprised of multiple software modules, which are created with different technologies and deployed to different runtimes.
+
+mta.yaml (Development descriptor) → defines what and how to build
+mtad.yaml (Deployment descriptor) → defines how to deploy
+MTAR: Archive file containing everything needed for deployment
+MTAR size: up to 4 GB
+mtad.yaml: 1 MB
+
+mta.yaml → written by developer
+MBT converts it
+mtad.yaml → generated automatically → used by deployment
+development descriptor is used to generate deployment descriptor
+
+mta.yaml is officially a development descriptor. It’s sometimes informally called a deployment descriptor because it defines everything needed for deployment, but the actual deployment descriptor is mtad.yaml, which is generated during the build
+
+MTA archive (MTAR):
+	Archive containing a deployment descriptor, the module and resource binaries, and configuration files. The archive follows the JAR file specification.
+
+An MTA archive consists of the following:
+The MANIFEST.MF file
+The mtad.yaml MTA deployment descriptor file
+Application binaries, content, or configuration files
+
+
+
+cds up - Essentially, this automates the following steps:
+
+# Installing app dependencies, e.g.
+npm i app/browse
+npm i app/admin-books
+
+# If project is monorepo
+ln -sf ../package-lock.json
+
+# If project is multitenant
+npm i --package-lock-only --prefix mtx/sidecar
+
+# If package-lock.json doesn't exist
+npm i --package-lock-only
+
+# Final assembly and deployment...
+mbt build -t gen --mtar mta.tar
+cf deploy gen/mta.tar -f
+
+Normally, we run cds add mta manually for MTA deployment. But newer CAP tooling can automatically generate the MTA configuration during cds up if it detects a Cloud Foundry deployment scenario
