@@ -978,3 +978,31 @@ mbt build -t gen --mtar mta.tar
 cf deploy gen/mta.tar -f
 
 Normally, we run cds add mta manually for MTA deployment. But newer CAP tooling can automatically generate the MTA configuration during cds up if it detects a Cloud Foundry deployment scenario
+
+
+
+
+-----------------------------  Fiori  ------------------------------
+
+
+manifest.json
+
+1. _version
+
+2. sap.app → App Metadata
+
+3. sap.ui → UI Capabilities
+
+4. sap.ui5 → Main UI Configuration
+
+5. sap.fiori
+
+6. sap.fe
+
+Section	Purpose
+flexEnabled
+dependencies
+contentDensities
+models
+resources
+routing	
