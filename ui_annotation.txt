@@ -1,62 +1,120 @@
-HeaderInfo
-Identification
-Badge
-LineItem
-StatusInfo
-FieldGroup
-ConnectedFields
-GeoLocations
-GeoLocation
-Contacts
-Contact
-MediaResource
-DataPoint
-KPI
-Chart
-ValueCriticality
-CriticalityLabels
-SelectionFields
-Facets
-HeaderFacets
-QuickViewFacets
-QuickCreateFacets
-FilterFacets
-OperationParameterFacets
-SelectionPresentationVariant
-PresentationVariant
-SelectionVariant
-ThingPerspective
-IsSummary
-PartOfPreview
-Map
-Gallery
-IsImageURL
-IsNaturalPerson
-IsImage
-MultiLineText
-Placeholder
-InputMask
-TextArrangement
-DateTimeStyle
-Note
-Importance
-Hidden
-IsCopyAction
-IsAIOperation
-CreateHidden
-UpdateHidden
-DeleteHidden
-HiddenFilter
-AdaptationHidden
-DataFieldDefault
-Criticality
-CriticalityCalculation
-Emphasized
-OrderBy
-ParameterDefaultValue
-RecommendationState
-RecommendationList
-Recommendations
-ExcludeFromNavigationContext
-DoNotCheckScaleOfMeasuredQuantity
-LeadingEntitySet
+Tag                                 → 15
+  ThingPerspective
+  IsSummary
+  PartOfPreview
+  Map
+  Gallery
+  IsImage
+  MultiLineText
+  Hidden
+  IsCopyAction
+  IsAIOperation
+  CreateHidden
+  UpdateHidden
+  DeleteHidden
+  HiddenFilter
+  AdaptationHidden
+  Emphasized
+  ExcludeFromNavigationContext
+
+DataFieldAbstract                   → 3
+  Identification
+  LineItem
+  StatusInfo
+  DataFieldDefault
+
+Facet                               → 4
+  Facets
+  HeaderFacets
+  QuickViewFacets
+  QuickCreateFacets
+
+ReferenceFacet                      → 3
+  FilterFacets
+  OperationParameterFacets
+
+GeoLocationType                     → 2
+  GeoLocations
+  GeoLocation
+
+AnnotationPath                      → 2
+  Contacts
+
+PropertyPath                        → 2
+  SelectionFields
+  OrderBy
+
+String                              → 2
+  Placeholder
+  DateTimeStyle
+  LeadingEntitySet
+
+Boolean                             → 1
+  DoNotCheckScaleOfMeasuredQuantity
+
+PrimitiveType                       → 1
+  ParameterDefaultValue
+
+HeaderInfoType                      → 1
+  HeaderInfo
+
+BadgeType                           → 1
+  Badge
+
+FieldGroupType                      → 1
+  FiedlGroup
+
+
+ConnectedFieldsType                 → 1
+  ConnectedFields
+
+MediaResourceType                   → 1
+  MediaResource
+
+DataPointType                       → 1
+  DataPoint
+
+KPIType                             → 1
+  KPI
+
+ChartDefinitionType                 → 1
+  Chart
+
+ValueCriticalityType                → 1
+  ValueCriticality
+
+CriticalityLabelType                → 1
+  CriticalityLabels
+
+SelectionPresentationVariantType    → 1
+  SelectionPresentationVariant
+
+PresentationVariantType             → 1
+  PresentationVariant
+
+SelectionVariantType                → 1
+  SelectionVariant
+
+InputMaskType                       → 1
+  InputMask
+
+TextArrangementType                 → 1
+  TextArrangement
+
+NoteType                            → 1
+  Note
+
+ImportanceType                      → 1
+  Importance
+
+RecommendationStateType             → 1
+  RecommendationState
+
+RecommendationListType              → 1
+  RecommendationList
+
+CriticalityType                     ->1
+  Criticality
+
+CriticalityCalculationType         ->1
+  CriticalityCalculation

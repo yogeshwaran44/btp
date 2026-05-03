@@ -1038,7 +1038,7 @@ ui vocabulary:
   UI.* → for layout, pages, display
   Terms for presenting data in user interfaces
   The SAP UI Vocabulary aims to optimize usage of data in UI channels. It focuses on usage patterns of data in UIs, not on UI patterns, and it is    completely independent of the UI technologies or devices used to visualize the data.
-  link : https://github.com/SAP/odata-vocabularies/blob/main/vocabularies/UI.md#CriticalityType
+  link : https://github.com/SAP/odata-vocabularies/blob/main/vocabularies/UI.md
 
 common vocabulary:
    Common.* → for behavior, metadata, input help
