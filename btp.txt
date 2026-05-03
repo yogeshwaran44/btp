@@ -152,7 +152,10 @@ OData (Core Annotations)
 @open
 @odata.singleton.nullable
 
-
+core vocabulary:
+  2   Core.* → technical rules
+  3   Core terms needed to write vocabularies
+  4   link : https://github.com/oasis-tcs/odata-vocabularies/blob/main/vocabularies/Org.OData.Core.V1.md
 
 
 
@@ -986,23 +989,73 @@ Normally, we run cds add mta manually for MTA deployment. But newer CAP tooling 
 
 
 manifest.json
+  the manifest describes the behavior of an app through attributes.
+  It follows a JSON structure with namespaces like sap.app, sap.ui, and sap.ui5, each responsible for specific configurations (e.g., app ID, UI settings, dependencies).
+  The manifest schema defines valid fields and evolves with SAPUI5 versions.  link : https://github.com/UI5/manifest/blob/main/types/manifest.d.ts
+  The “manifest-first” approach loads the manifest before component creation, improving performance by preloading dependencies and models
+  The manifest includes key configurations such as:
+    App metadata (ID, title, version)
+    Data sources (OData, annotations, etc.)
+    Dependencies (libraries, components)
+    Models and resources
+    Routing and navigation
+    Device support and UI settings
+  It also supports cross-navigation, i18n (translations), and component reuse.
+  Special ui5:// URLs can be used for flexible resource resolution.
+  The manifest must be declared in the component (manifest: "json"), and once deployed, it becomes read-only. 
 
-1. _version
 
-2. sap.app → App Metadata
+Manifest Content
+1. No Namespace
+2. sap.app
+3. sap.ui
+4. sap.ui5
+5. sap.platform.abap
+6. sap.platform.hcp
+7. sap.fiori
+8. sap.card
+9. _version
 
-3. sap.ui → UI Capabilities
+fiori is built on top of ui5. which js frontend ui framework and follows mvc architecture
 
-4. sap.ui5 → Main UI Configuration
+Fiori is built on 5 principles:
 
-5. sap.fiori
+Role-based - Apps are designed for specific users (e.g., manager, employee)
+Simple - Only necessary information is shown
+Coherent - Same experience across all apps
+Responsive - Works on mobile, tablet, desktop
+Delightful - Smooth, modern UI interactions
 
-6. sap.fe
 
-Section	Purpose
-flexEnabled
-dependencies
-contentDensities
-models
-resources
-routing	
+types of fiori apps:
+1. Transactional apps - Perform tasks (create, edit, approve)
+2. Analytical apps - Dashboards, charts, KPIs
+3. Fact Sheet apps - Display detailed information about objects
+
+
+
+ui vocabulary:
+  UI.* → for layout, pages, display
+  Terms for presenting data in user interfaces
+  The SAP UI Vocabulary aims to optimize usage of data in UI channels. It focuses on usage patterns of data in UIs, not on UI patterns, and it is    completely independent of the UI technologies or devices used to visualize the data.
+  link : https://github.com/SAP/odata-vocabularies/blob/main/vocabularies/UI.md#CriticalityType
+
+common vocabulary:
+   Common.* → for behavior, metadata, input help
+   Common terms for all SAP vocabularies
+   link : https://github.com/SAP/odata-vocabularies/blob/main/vocabularies/Common.md
+
+capabilities vocabulary:
+   Capabilities.* → what user is allowed to do
+   Terms describing capabilities of a service
+   link : https://github.com/oasis-tcs/odata-vocabularies/blob/main/vocabularies/Org.OData.Capabilities.V1.md#FilterRestrictionsType
+ 
+
+note:
+     terms are annotations
+     types are structure or value of a term
+     if use @ at top level then dont need mention in @ inside just mention the term
+     use # for enum type values
+
+
+
