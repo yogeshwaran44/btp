@@ -1048,7 +1048,7 @@ common vocabulary:
 capabilities vocabulary:
    Capabilities.* → what user is allowed to do
    Terms describing capabilities of a service
-   link : https://github.com/oasis-tcs/odata-vocabularies/blob/main/vocabularies/Org.OData.Capabilities.V1.md#FilterRestrictionsType
+   link : https://github.com/oasis-tcs/odata-vocabularies/blob/main/vocabularies/Org.OData.Capabilities.V1.md
  
 
 note:
