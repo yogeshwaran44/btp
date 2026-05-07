@@ -17,6 +17,10 @@ annotate service.user with @(
             }
         ],
     },
+    UI.PresentationVariant:{
+        MaxItems:1,
+        Visualizations:[@UI.LineItem]
+    },
     UI.Facets : [
         {
             $Type : 'UI.ReferenceFacet',
