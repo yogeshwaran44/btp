@@ -44,6 +44,15 @@
   },
   "sap.ui5": {
     "flexEnabled": true,
+    "rootView": {
+  "viewName": "sap.fe.core.rootView.Fcl",
+  "type": "XML",
+  "async": true,
+  "id": "appRootView"
+},"flexibleColumnLayout":{
+                "defaultTwoColumnLayoutType":"TwoColumnsMidExpanded",
+                "defaultThreeColumnLayoutType":"ThreeColumnsMidExpanded"
+            },
     "dependencies": {
       "minUI5Version": "1.147.2",
       "libs": {
@@ -81,17 +90,26 @@
       "css": []
     },
     "routing": {
-      "config": {},
+      "config": {
+        "routerClass":"sap.f.routing.Router",
+        "viewType": "XML",
+        "async": true
+      },
       "routes": [
         {
           "pattern": ":?query:",
           "name": "userList",
-          "target": "userList"
+          "target": ["userList"]
         },
         {
-          "pattern": "user({key}):?query:",
+          "pattern": "user({key},IsActiveEntity={IsActiveEntity}):?query:",
           "name": "userObjectPage",
-          "target": "userObjectPage"
+                    "target": ["userList","userObjectPage"]
+        },
+        {
+          "pattern":  "user({key},IsActiveEntity={IsActiveEntity})/role({key2},IsActiveEntity={IsActiveEntity2}):?query:",
+          "name": "roleObjectPage",
+          "target": ["userList","userObjectPage","roleObjectPage"]
         }
       ],
       "targets": {
@@ -99,6 +117,8 @@
           "type": "Component",
           "id": "userList",
           "name": "sap.fe.templates.ListReport",
+                    "controlAggregation": "beginColumnPages",
+
           "options": {
             "settings": {
               "initialLoad":"Enabled",
@@ -125,10 +145,34 @@
           "type": "Component",
           "id": "userObjectPage",
           "name": "sap.fe.templates.ObjectPage",
+                      "controlAggregation": "midColumnPages",
+            "contextPattern": "/user({key},IsActiveEntity={IsActiveEntity})",
+
           "options": {
             "settings": {
               "editableHeaderContent": false,
-              "contextPath": "/user"
+              "contextPath": "/user",
+              "navigation": {
+        "role": {
+          "detail": {
+            "route": "roleObjectPage"
+          }
+        }
+      }
+            }
+          }
+        },
+        "roleObjectPage": {
+          "type": "Component",
+          "id": "roleObjectPage",
+          "name": "sap.fe.templates.ObjectPage",
+                      "controlAggregation": "endColumnPages",
+            "contextPattern": "/user({key},IsActiveEntity={IsActiveEntity})/role({key2},IsActiveEntity={IsActiveEntity2})",
+
+          "options": {
+            "settings": {
+              "editableHeaderContent": false,
+              "contextPath": "/role"
             }
           }
         }
