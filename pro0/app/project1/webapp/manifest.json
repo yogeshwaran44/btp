@@ -28,6 +28,7 @@
   },
   "sap.ui": {
     "technology": "UI5",
+  "theme": "sap_horizon_dark",
     "icons": {
       "icon": "",
       "favIcon": "",
@@ -101,6 +102,7 @@
           "name": "sap.fe.templates.ListReport",
           "options": {
             "settings": {
+              
               "contextPath": "/user",
               "initialLoad":"Enabled",
               "variantManagement": "Page",
@@ -128,7 +130,21 @@
           "options": {
             "settings": {
               "editableHeaderContent": false,
-              "contextPath": "/user"
+              "contextPath": "/user","controlConfiguration": {
+  "user/@com.sap.vocabularies.UI.v1.LineItem": {
+    "columns": {
+      "DataField::description": {
+        "formatOptions": {
+          "textLinesEdit": 3,
+          "textMaxLines": 5,
+          "textMaxCharactersDisplay": 400,
+          "textExpandBehaviorDisplay": "Popover"
+        }
+      }
+    }
+  }
+}
+
             }
           }
         }
