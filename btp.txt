@@ -959,7 +959,7 @@ The MANIFEST.MF file
 The mtad.yaml MTA deployment descriptor file
 Application binaries, content, or configuration files
 
-
+link: https://help.sap.com/docs/btp/sap-business-technology-platform/multitarget-applications-in-cloud-foundry-environment?locale=en-US
 
 cds up - Essentially, this automates the following steps:
 
@@ -1085,4 +1085,26 @@ project1
 │   ├── manifest.json		---  Most important UI5 configuration file. application descriptor.
 │   └── test				---  Contains test files.
 └── services.cds			---  Defines CAP OData services.
+
+SAP Fiori Elements:
+	SAP Fiori elements is a framework for building enterprise-ready SAP applications. developers can use SAP Fiori elements to create SAP Fiori applications based on ODATA services and annotations that don't need JavaScript UI Coding.
+
+main features:
+building blocks
+standard floorplans
+custom page
+
+
+standard floorplans:
+	list report page - Used to display and search large collections of business data.
+	worklist page - Focused on actionable tasks rather than analytics.
+	analytical page - Combines analytics + transactional processing.
+	object page - Used to display detailed information about one business object.
+	overview page - A dashboard-like landing page.
+
+floorplan properties:
+	main entity
+	navigation entity
+	table type
+
 
