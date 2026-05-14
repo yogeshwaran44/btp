@@ -28,6 +28,11 @@ annotate service.user with @(
                 $Type : 'UI.DataField',
                 Value: email,
             },
+             {
+                $Type:'UI.DataFieldForAnnotation',
+                Label:'Rating',
+                Target:'@UI.DataPoint#rating'
+            },
             {
     $Type : 'UI.DataField',
     Value : description,
@@ -73,12 +78,22 @@ annotate service.user with @(
             {
                 $Type : 'UI.DataField',
                 Value: email,
+            },
+            {
+                $Type:'UI.DataFieldForAnnotation',
+                Label:'Rating',
+                Target:'@UI.DataPoint#rating'
             }
 ,{
     $Type : 'UI.DataField',
     Value : description,
 }
     ],
+    UI.DataPoint #rating:{
+        Value:rating,
+        TargetValue:5,
+        Visualization:#Rating
+    }
 );
 
 annotate service.user with {

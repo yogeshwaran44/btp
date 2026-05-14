@@ -1016,6 +1016,8 @@ Manifest Content
 8. sap.card
 9. _version
 
+manifest schema : https://github.com/UI5/manifest/blob/main/types/manifest.d.ts
+
 fiori is built on top of ui5. which js frontend ui framework and follows mvc architecture
 
 Fiori is built on 5 principles:
@@ -1058,4 +1060,29 @@ note:
      use # for enum type values
 
 
+
+In sap Fiori, there are generally 3 way UI gets created:
+annotation driven:
+	generated automatically from cds annotation, odata metadata.
+sapui5 controls:
+	controlled by xml views, js views and controllers.
+hybrid(annotation + custom ui):
+	consume annotation metadata but still require custom UI coding
+
+
+CAP Fiori folder structure:
+
+project1
+├── README.md				---  Documentation for the app
+├── annotations.cds		---  Contains CDS UI annotations.
+├── eslint.config.mjs		---  Configuration for ESLint checks JavaScript code quality.
+├── package.json			---  Node.js project configuration.
+├── ui5.yaml				---  Configuration for UI5 Tooling.
+├── webapp					---  Main frontend source folder.
+│   ├── Component.js		---  Root UI5 component. Initializes the application.
+│   ├── i18n				---  Translation files.
+│   ├── index.html			---  Entry HTML page. Bootstraps UI5 framework.
+│   ├── manifest.json		---  Most important UI5 configuration file. application descriptor.
+│   └── test				---  Contains test files.
+└── services.cds			---  Defines CAP OData services.
 

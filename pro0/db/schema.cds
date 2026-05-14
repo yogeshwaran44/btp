@@ -5,8 +5,9 @@ entity User{
     name : String(10);
     image : String;
     mobile : Integer ;
-    email: String(30);
+    email: String(15);
     aadhar:Integer;
         description    : LargeString;
+        rating : Integer;
 
 }
